@@ -1,0 +1,91 @@
+pipeline{
+    agent{
+        label "node"
+    } 
+    stages{
+        //build stage
+        stage("build"){
+            steps{
+                echo "========building app A========"
+            }
+            post{
+                always{
+                    echo "========build is completed========"
+                }
+                success{
+                    echo "========build stage executed successfully========"
+                }
+                failure{
+                    echo "========build stage execution failed========"
+                }
+            }
+        }
+
+        //test stage 
+        stage("test"){
+            steps{
+                echo "========unit testing app A========"
+            }
+            post{
+                always{
+                    echo "========unit testing is done========"
+                }
+                success{
+                    echo "========test stage executed successfully========"
+                }
+                failure{
+                    echo "========test stage execution failed========"
+                }
+            }
+        }
+
+        //publish artficats to repository stage 
+        stage("publish"){
+            steps{
+                echo "========publish artifcats A to nexus========"
+            }
+            post{
+                always{
+                    echo "========publish completed========"
+                }
+                success{
+                    echo "========publish stage executed successfully========"
+                }
+                failure{
+                    echo "========publish stage execution failed========"
+                }
+            }
+        }
+
+        //deploy to server stage 
+        stage("deploy"){
+            steps{
+                echo "========Deploying app A========"
+            }
+            post{
+                always{
+                    echo "========deploy completed========"
+                }
+                success{
+                    echo "========deploy stage executed successfully========"
+                }
+                failure{
+                    echo "========deploy stage failed========"
+                }
+            }
+        }
+
+
+    }
+    post{
+        always{
+            echo "========always========"
+        }
+        success{
+            echo "========pipeline executed successfully ========"
+        }
+        failure{
+            echo "========pipeline execution failed========"
+        }
+    }
+}
